@@ -1,13 +1,13 @@
 > # FORK NOTICE
-> I have forked the steam-headless docker to adapt it to my crappy bleeding edge AMD GPU. So bleeding that drivers don't work. Here are most of the hacks I use to reduce the amount of crashes and GPU-resets I get with my own hardware :
+> I have forked the steam-headless docker to adapt it to my crappy bleeding edge AMD GPU. Here are most of the hacks I use to reduce the amount of crashes and GPU-resets I get with my own hardware :
 > 
 > **AMD Ryzen 7 8845HS with Radeon 780M** (gfx1103_r1) (wouldn't recommend)
+>
+> If you are still experiencing GPU crashes, upgrade your host kernel. My GPU was completely broken and unusable until kernel 6.15.
 > 
-> If you are using different hardware, you should stick with [the original project](https://github.com/Steam-Headless/docker-steam-headless). This fork breaks non-amd gpu support and might break features I don't use.
+> If you are using non-AMD hardware, you should stick with [the original project](https://github.com/Steam-Headless/docker-steam-headless). This fork breaks non-amd gpu support and might break features I don't use.
 >
 > It is expected that you edit `/etc/default/grub` to include `amdgpu.virtual_display=0000:c6:00.0,1` in `GRUB_CMDLINE_LINUX_DEFAULT` (after replacing the PCI address with your own). Otherwise, you will get a black screen.
->
-> You also might need to remove ALL your drivers from the host. Yes, this makes no sense as they should be inactive, but it fixed crashes for me. There might be a bug in the universe at this point.
 >
 > Once sunshine is up and running, you might want to go to its settings and force it to use the VA-API encoder. Otherwise, the stream will be so laggy it's unplayable.
 > 
