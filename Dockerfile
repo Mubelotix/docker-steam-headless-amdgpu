@@ -520,9 +520,6 @@ RUN \
             /var/tmp/* \
             /tmp/* \
     && \
-    echo "**** Fix Sunshine library version mismatch ****" \
-        && ln -s /usr/lib/x86_64-linux-gnu/libminiupnpc.so.18 /usr/lib/x86_64-linux-gnu/libminiupnpc.so.17 \
-    && \
     echo
 
 # TODO: Deprecate neko
