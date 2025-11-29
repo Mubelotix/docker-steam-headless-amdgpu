@@ -1,9 +1,7 @@
 > # FORK NOTICE
-> I have forked the steam-headless docker to adapt it to my crappy bleeding edge AMD GPU. Here are most of the hacks I use to reduce the amount of crashes and GPU-resets I get with my own hardware :
-> 
-> **AMD Ryzen 7 8845HS with Radeon 780M** (gfx1103_r1) (wouldn't recommend)
+> I originally forked the steam-headless docker to adapt it to my crappy bleeding edge AMD GPU. While there were significant divergences with upstream in the past with hacky workarounds, Linux kernel 6.15 fixed most of my issues, so I reverted code to get on back on track with upstream. What remains are convenience edits, like having drivers installed already.
 >
-> If you are still experiencing GPU crashes, upgrade your host kernel. My GPU was completely broken and unusable until kernel 6.15.
+> My harware: **AMD Ryzen 7 8845HS with Radeon 780M** (gfx1103_r1) (wouldn't recommend)
 > 
 > If you are using non-AMD hardware, you should stick with [the original project](https://github.com/Steam-Headless/docker-steam-headless). This fork breaks non-amd gpu support and might break features I don't use.
 >
