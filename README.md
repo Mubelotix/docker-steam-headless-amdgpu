@@ -1,5 +1,5 @@
 > # FORK NOTICE
-> I originally forked the steam-headless docker to adapt it to my crappy bleeding edge AMD GPU. While there were significant divergences with upstream in the past with hacky workarounds, Linux kernel 6.15 fixed most of my issues, so I reverted code to get on back on track with upstream. What remains are convenience edits, like having drivers installed already.
+> I forked the steam-headless docker to adapt it to my crappy bleeding edge AMD GPU.
 >
 > My harware: **AMD Ryzen 7 8845HS with Radeon 780M** (gfx1103_r1) (wouldn't recommend)
 > 
@@ -8,6 +8,8 @@
 > It is expected that you edit `/etc/default/grub` to include `amdgpu.virtual_display=0000:c6:00.0,1` in `GRUB_CMDLINE_LINUX_DEFAULT` (after replacing the PCI address with your own). Otherwise, you will get a black screen.
 >
 > Once sunshine is up and running, you might want to go to its settings and force it to use the VA-API encoder. Otherwise, the stream will be so laggy it's unplayable.
+> 
+> Also, there is a bug in `ffmpeg` for codec HEVC (H.265). If you encounter a green bar and screen size mismatch, just use H.264 instead.
 > 
 > <details>
 > <summary>Here is my docker-compose for reference</summary>
