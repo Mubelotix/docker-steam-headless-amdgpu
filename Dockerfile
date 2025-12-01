@@ -1,4 +1,4 @@
-FROM debian:bookworm-slim
+FROM debian:testing-slim
 LABEL maintainer="Josh.5 <jsunnex@gmail.com>"
 
 # Update package repos
@@ -67,7 +67,7 @@ RUN \
             jq \
             less \
             man-db \
-            mlocate \
+            plocate \
             nano \
             net-tools \
             p7zip-full \
@@ -191,7 +191,6 @@ RUN \
             xclip \
             xcvt \
             xdotool \
-            xfishtank \
             xfonts-base \
             xinit \
             xorg \
@@ -273,10 +272,8 @@ RUN \
         && sed -i '/[Desktop Entry]/a\NoDisplay=true' /usr/share/applications/vim.desktop \
         && sed -i '/[Desktop Entry]/a\NoDisplay=true' /usr/share/applications/thunar-settings.desktop \
         && sed -i '/[Desktop Entry]/a\NoDisplay=true' /usr/share/applications/thunar.desktop \
-        && sed -i '/[Desktop Entry]/a\NoDisplay=true' /usr/share/applications/pavucontrol.desktop \
         && sed -i '/[Desktop Entry]/a\NoDisplay=true' /usr/share/applications/x11vnc.desktop \
-        && sed -i '/[Desktop Entry]/a\NoDisplay=true' /usr/share/applications/display-im6.q16.desktop \
-        # These are named specifically for Debian
+        # These are named specifically for Debain
         && sed -i '/[Desktop Entry]/a\NoDisplay=true' /usr/share/applications/debian-xterm.desktop \
         && sed -i '/[Desktop Entry]/a\NoDisplay=true' /usr/share/applications/debian-uxterm.desktop \
         # Force these apps to be "System" Apps rather than "Categories=System;Utility;Core;GTK;Filesystem;"
@@ -416,7 +413,7 @@ RUN \
             gstreamer1.0-vaapi \
             gstreamer1.0-x \
             libgstreamer1.0-0 \
-            libncursesw5 \
+            libncursesw6 \
             libopenal1 \
             libsdl-image1.2 \
             libsdl-ttf2.0-0 \
