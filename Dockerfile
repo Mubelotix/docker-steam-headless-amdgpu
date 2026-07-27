@@ -511,7 +511,6 @@ RUN \
     #  Seems to be missing in trixie
 
 # Install Sunshine
-COPY --from=lizardbyte/sunshine:v2025.1201.154205-debian-trixie /sunshine.deb /usr/src/sunshine.deb
 RUN \
     echo "**** Update apt database ****" \
         && apt-get update \
