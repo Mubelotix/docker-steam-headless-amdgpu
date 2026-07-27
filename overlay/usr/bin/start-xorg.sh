@@ -23,6 +23,15 @@ trap _term SIGTERM SIGINT
 if [ $(grep autostart /etc/supervisor.d/udev.ini 2> /dev/null) == "autostart=true" ]; then
     wait_for_udev
 fi
+# Clean up stale X11 lock file if the owning process is dead
+LOCK_FILE="/tmp/.X${DISPLAY#:}-lock"
+if [ -f "$LOCK_FILE" ]; then
+    LOCK_PID=$(cat "$LOCK_FILE" 2>/dev/null | tr -d ' \n')
+    if [ -n "$LOCK_PID" ] && ! kill -0 "$LOCK_PID" 2>/dev/null; then
+        echo "Removing stale X11 lock for dead PID ${LOCK_PID}"
+        rm -f "$LOCK_FILE" "/tmp/.X11-unix/X${DISPLAY#:}"
+    fi
+fi
 # Run X server
 /usr/bin/Xorg \
     -ac \

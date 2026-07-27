@@ -299,6 +299,9 @@ RUN \
             /var/tmp/* \
             /tmp/* \
     && \
+    echo "**** Disable light-locker (crashes without logind) ****" \
+        && apt-get remove -y light-locker 2>/dev/null || true \
+    && \
     echo
 
 # Add support for flatpaks and D-Bus system services
@@ -330,6 +333,9 @@ RUN \
             /var/lib/apt/lists/* \
             /var/tmp/* \
             /tmp/* \
+    && \
+    echo "**** Increase D-Bus connection limit ****" \
+        && sed -i 's|</busconfig>|<limit name="max_connections_per_user">1024</limit>\n</busconfig>|' /usr/share/dbus-1/system.conf \
     && \
     echo
 
