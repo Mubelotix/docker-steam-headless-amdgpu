@@ -1,4 +1,4 @@
-FROM debian:testing-slim
+FROM debian:trixie-slim
 LABEL maintainer="Josh.5 <jsunnex@gmail.com>"
 
 # Update package repos
@@ -7,7 +7,7 @@ RUN \
     echo "**** Update apt database ****" \
         && sed -i '/^Components: main/ s/$/ contrib non-free/' /etc/apt/sources.list.d/debian.sources \
         && echo "deb http://deb.debian.org/debian unstable main contrib non-free" >> /etc/apt/sources.list.d/unstable.list \
-        && echo 'Package: *\nPin: release a=testing\nPin-Priority: 900\n\nPackage: *\nPin: release a=unstable\nPin-Priority: 50\n' > /etc/apt/preferences.d/limit-unstable \
+        && echo 'Package: *\nPin: release a=trixie\nPin-Priority: 900\n\nPackage: *\nPin: release a=unstable\nPin-Priority: 50\n' > /etc/apt/preferences.d/limit-unstable \
     && \
     echo
 
