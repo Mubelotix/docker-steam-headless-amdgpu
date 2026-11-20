@@ -1,3 +1,5 @@
+FROM docker.io/m1k1o/neko:base AS neko
+
 FROM debian:trixie-slim
 LABEL maintainer="Josh.5 <jsunnex@gmail.com>"
 
@@ -545,8 +547,8 @@ RUN \
 
 # TODO: Deprecate neko
 # Install Neko server
-COPY --from=m1k1o/neko:base /usr/bin/neko /usr/bin/neko
-COPY --from=m1k1o/neko:base /var/www /var/www
+COPY --from=neko /usr/bin/neko /usr/bin/neko
+COPY --from=neko /var/www /var/www
 
 # Various other tools
 ARG DUMB_INIT_VERSION=1.2.5
