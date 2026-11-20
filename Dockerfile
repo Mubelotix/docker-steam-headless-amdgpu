@@ -504,6 +504,7 @@ RUN \
         && apt-get install -y --no-install-recommends -t unstable \
             gamescope \
         && ln -sf /usr/games/steam /usr/bin/steam \
+        && ln -sf /usr/games/gamescope /usr/bin/gamescope \
     && \
     echo "**** Section cleanup ****" \
         && apt-get clean autoclean -y \
