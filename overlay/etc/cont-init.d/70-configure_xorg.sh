@@ -118,6 +118,8 @@ function configure_x_server {
         print_step_header "No monitors connected. Installing dummy xorg.conf"
         # Use a dummy display input
         cp -f /templates/xorg/xorg.dummy.conf /etc/X11/xorg.conf
+    else
+        echo "WARNING: This fork expects you to run with FORCE_X11_DUMMY_CONFIG=true. You are running an unsupported configuration."
     fi
 }
 

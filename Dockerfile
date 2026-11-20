@@ -1,4 +1,4 @@
-FROM debian:trixie-slim
+FROM debian:testing-slim
 LABEL maintainer="Josh.5 <jsunnex@gmail.com>"
 
 # Update package repos
@@ -6,6 +6,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN \
     echo "**** Update apt database ****" \
         && sed -i '/^Components: main/ s/$/ contrib non-free/' /etc/apt/sources.list.d/debian.sources \
+        && echo "deb http://deb.debian.org/debian unstable main contrib non-free" >> /etc/apt/sources.list.d/unstable.list \
+        && echo 'Package: *\nPin: release a=testing\nPin-Priority: 900\n\nPackage: *\nPin: release a=unstable\nPin-Priority: 50\n' > /etc/apt/preferences.d/limit-unstable \
     && \
     echo
 
@@ -102,6 +104,24 @@ RUN \
             /var/lib/apt/lists/* \
             /var/tmp/* \
             /tmp/* \
+    && \
+    echo
+
+# Install gpu drivers
+RUN \
+    echo "**** Add i386 architecture ****" \
+        && dpkg --add-architecture i386 \
+        && apt-get update \
+    && \
+    echo "**** Install GPU drivers ****" \
+        && apt-get install -y --no-install-recommends \
+            libvulkan1 \
+            libvulkan1:i386 \
+            mesa-vulkan-drivers \
+            mesa-vulkan-drivers:i386 \
+            mesa-utils \
+            mesa-utils-extra \
+            vulkan-tools \
     && \
     echo
 
@@ -206,7 +226,7 @@ RUN \
         && apt-get install -y --no-install-recommends \
             pulseaudio \
             alsa-utils \
-            libasound2 \
+            libasound2t64 \
             libasound2-plugins \
     && \
     echo "**** Section cleanup ****" \
@@ -429,8 +449,7 @@ RUN \
     && \
     echo "**** Install Intel media drivers and VAAPI ****" \
         && apt-get install -y --no-install-recommends \
-            intel-media-va-driver-non-free \
-            i965-va-driver-shaders \
+            mesa-va-drivers \
             libva2 \
     && \
     echo "**** Section cleanup ****" \
@@ -474,6 +493,8 @@ RUN \
     echo "**** Install Steam ****" \
         && apt-get install -y --no-install-recommends \
             steam-installer \
+        && apt-get install -y --no-install-recommends -t unstable \
+            gamescope \
         && ln -sf /usr/games/steam /usr/bin/steam \
     && \
     echo "**** Section cleanup ****" \
@@ -490,6 +511,7 @@ RUN \
     #  Seems to be missing in trixie
 
 # Install Sunshine
+COPY --from=lizardbyte/sunshine:v2025.1201.154205-debian-trixie /sunshine.deb /usr/src/sunshine.deb
 RUN \
     echo "**** Update apt database ****" \
         && apt-get update \
@@ -516,6 +538,9 @@ RUN \
             /var/lib/apt/lists/* \
             /var/tmp/* \
             /tmp/* \
+    && \
+    echo "**** Fix Sunshine library version mismatch ****" \
+        && ln -s /usr/lib/x86_64-linux-gnu/libminiupnpc.so.21 /usr/lib/x86_64-linux-gnu/libminiupnpc.so.17 \
     && \
     echo
 
