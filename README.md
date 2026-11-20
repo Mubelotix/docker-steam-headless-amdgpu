@@ -17,7 +17,7 @@
 > ```yaml
 > services:
 >   steam-headless:
->     image: mubelotix/docker-steam-headless-amdgpu:latest
+>     image: ghcr.io/mubelotix/docker-steam-headless-amdgpu:latest
 >     restart: unless-stopped
 >     shm_size: 2G
 >     ipc: host # Could also be set to 'shareable'
