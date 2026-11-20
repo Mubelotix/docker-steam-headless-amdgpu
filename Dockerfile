@@ -453,7 +453,7 @@ RUN \
     echo "**** Update apt database ****" \
         && apt-get update \
     && \
-    echo "**** Install Intel media drivers and VAAPI ****" \
+    echo "**** Install AMD media drivers and VAAPI ****" \
         && apt-get install -y --no-install-recommends \
             mesa-va-drivers \
             libva2 \
@@ -513,9 +513,6 @@ RUN \
     && \
     echo
 
-    #             gamescope \
-    #  Seems to be missing in trixie
-
 # Install Sunshine
 RUN \
     echo "**** Update apt database ****" \
@@ -543,9 +540,6 @@ RUN \
             /var/lib/apt/lists/* \
             /var/tmp/* \
             /tmp/* \
-    && \
-    echo "**** Fix Sunshine library version mismatch ****" \
-        && ln -s /usr/lib/x86_64-linux-gnu/libminiupnpc.so.21 /usr/lib/x86_64-linux-gnu/libminiupnpc.so.17 \
     && \
     echo
 
