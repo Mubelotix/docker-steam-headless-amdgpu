@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This project is discontinued. I switched to [DimitriTimoz's kyber-gaming setup](https://github.com/DimitriTimoz/kyber-gaming).
+
 > # FORK NOTICE
 > I forked the steam-headless docker to adapt it to my crappy bleeding edge AMD GPU.
 >
